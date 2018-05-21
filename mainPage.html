@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GeoCode!</title>
+    <style>
+      input {
+        height: 30px;
+        padding-left: 10px;
+        border-radius: 4px;
+        border: 1px solid rgb(186, 178, 178);
+        box-shadow: 0px 0px 12px #EFEFEF;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&language=en"></script>
+
+    <script src="js/bootstrap.min.js" /> </script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+    <script>  function myFunction(){
+
+      var mapLocation =  document.getElementById('myText').value
+      console.log(mapLocation);
+
+      mapLocation = mapLocation.replace(/\s/g, '');
+
+      console.log(mapLocation);
+
+
+      document.location.href='index.html?mapLocation='+mapLocation;
+
+
+
+    } 
+
+  </script>
+
+  </head>
+
+
+  <body>
+
+    <div class="container" >
+
+      <div ><img src="img/header.jpg" class="img-fluid" /></div>
+
+      <br><br>
+      
+    <h2>Get Latitude and Longitude</h2>
+
+    <br>
+
+
+    <input  placeholder="Enter Location" type="text" id="myText"/> <button type="button" class="btn btn-primary" onclick="myFunction()">FIND</button>  
+
+    <br><br>
+
+
+    <h3>What is Latitude and Longitude?</h3>
+    <p>Latitude and Longitude are the units that represent the coordinates at geographic coordinate system. Just like every actual house has its address (which includes the number, the name of the street, city, etc), every single point on the surface of earth can be specified by the latitude and longitude coordinates. Therefore, by using latitude and longitude we can specify virtually any point on earth.
+
+The latitude has the symbol of phi, and it shows the angle between the straight line in the certain point and the equatorial plane.<br><br> <strong>The latitude </strong>is specified by degrees, starting from 0° and ending up with 90° to both sides of the equator, making latitude Northern and Southern. The equator is the line with 0° latitude. The longitude has the symbol of lambda and is another angular coordinate defining the position of a point on a surface of earth. The longitude is defined as an angle pointing west or east from the Greenwich Meridian, which is taken as the Prime Meridian.<br><br> <strong>The longitude </strong> can be defined maximum as 180° east from the Prime Meridian and 180° west from the Prime Meridian.
+
+Both latitude and longitude are measured in degrees, which are in turn divided into minutes and seconds. For example, the tropical zone which is located to the south and to the north from the Equator is determined by the limits of 23°26'13.7'' S and 23°26'13.7'' N. Or. For example, the geographical coordinates of the mount Ngauruhoe in New Zealand, famous with its being the filming area for the Lord of the Rings movie, has the geographic coordinates of 39°09'24.6''S 175°37'55.8''E.</p>
+
+
+
+
+
+  </div>
+    </div> <!–– end of container class...––>
+
+    <script>
+      var input = document.getElementById('myText');
+      var autocomplete = new google.maps.places.Autocomplete(input);
+    </script>
+  </body>
+</html>

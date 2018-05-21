@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Location!</title>
+		<style>
+#map{
+	height: 400px;
+	width: 100%;
+}
+ 
+</style>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWr5rQ2T38wSrxhG8zk_mOqvCYmDXymrk&callback=initMap"
+    async defer>  	
+  </script>
+
+   <script src="js/bootstrap.min.js" /> </script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+
+
+
+  
+
+
+
+
+<script type="text/javascript">
+	
+
+
+var myLat;
+var myLng;
+
+	
+	
+
+	
+
+ 
+        //retreiving URL from Google GeoCode API.....
+
+      
+ 
+
+
+
+
+
+
+
+	// auto complete map search login.................
+
+
+   
+
+</script>
+
+</head>
+
+
+<body>
+
+
+	<div class="container">
+	
+	<div id="map"></div>
+	<p id="demo"></p>
+
+	<br><br>
+
+	Address:  <input type="text" size="40"  id="address" >
+	 <br><br>
+	 Latitude:  <input type="text"  id="lati" >
+     Longitude: <input type="text"  id="lngi" ><br>
+	
+	</div>
+	
+
+
+
+    <script>
+
+
+    	// GOOGLE MAP.......................................
+
+		function initMap(){
+		//map options variable...
+		var options = {
+			zoom:10,
+			center:{lat:40.7830603 , lng:-73.9712488}
+		}
+		//showing google maps in div...
+		var map = new google.maps.Map(document.getElementById('map'), options);
+
+		//adding marker...
+		//var marker = new google.maps.Marker({position: {lat:myLat , lng:myLng},map:map,
+			//icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'});
+
+
+	}
+
+
+	//END GOOGLE MAP...............................................................
+
+    
+    function load() {
+
+	//var locationAddress = document.getElementById("myText").value;
+
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var userLocation = url.searchParams.get("mapLocation");
+	console.log(userLocation);
+
+	
+
+	var googleApiEndpoint = "https://maps.googleapis.com/maps/api/geocode/json?address="+userLocation+"&key=AIzaSyCWr5rQ2T38wSrxhG8zk_mOqvCYmDXymrk";
+    
+    loadJSON(googleApiEndpoint, function(response) {
+
+
+  
+        var actual_JSON = JSON.parse(response);
+        console.log(actual_JSON);
+        console.log(actual_JSON['results'][0]['geometry']['location']['lat']);
+        console.log(actual_JSON['results'][0]['geometry']['location']['lng']);
+
+        myLat = actual_JSON['results'][0]['geometry']['location']['lat'];
+        myLng = actual_JSON['results'][0]['geometry']['location']['lng'];
+
+        document.getElementById("lati").value = myLat;
+        document.getElementById("lngi").value = myLng;
+        document.getElementById("address").value = userLocation;
+
+
+
+         var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(myLat,myLng),
+                        map: map
+                    });
+
+    });
+
+    
+
+
+    
+
+    
+    
+}
+//intililizing the script.....
+load();
+
+
+ function loadJSON(file, callback) {   
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);  
+ }
+
+
+
+
+    </script>
+
+  
+   
+
+</body>
+
+
+
+</html>
